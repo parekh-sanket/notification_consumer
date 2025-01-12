@@ -38,18 +38,17 @@ async function processNotification({payload}) {
         // process all message which is high priority, or sendTime is not given or isScheduled is true
         if (payload?.isRetry || payload?.isScheduled || !payload?.scheduleTime) {
             status = await sendNotificationService.sendNotification({payload})
-            
             // if failed then retry 3 time
             if(status === 'failed'){
-                if(!notificationObj?.retryCount || notificationObj?.retryCount <= 3){
-                    return processNotification({...payload, notificationObj : notificationObj, isRetry : true})
+                if(!notificationObj?.retryCount || notificationObj?.retryCount < 3){
+                    return processNotification({ payload : {...payload, notificationObj : notificationObj, isRetry : true}})
                 }
             }
         }
 
         // update message status
         await Notification.updateOne({
-            _id : new ObjectId(notificationObj._id)
+            _id : notificationObj._id
         },{
             $set : {
                 status : status
@@ -74,6 +73,8 @@ async function processScheduledNotifications() {
                 },
                 status: "pending",
             })
+
+        console.log(`LOG >>> found ${scheduledNotifications.length} no of schedule message`)
         
         // create payload and do re process on message
         for(let notification of scheduledNotifications){
@@ -81,6 +82,7 @@ async function processScheduledNotifications() {
             processNotification({
                 payload : {
                     ...notification,
+                    notificationObj : notification,
                     isScheduled : true
                 }
             })

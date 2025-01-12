@@ -14,10 +14,13 @@
         "sendNotificationsTopic" : "notifications",
         "sendNotificationsGroup" : "notifications_g_1"
     },
-    "opensearch" :{
-        "port" : 9200,
-        "username" : "admin", 
-        "password" : "admin",
-        "host" : "localhost"
+    "email" :{
+        "emailUser": "j******eal.email",
+        "emailPass": "4****UKbAF"
+    },
+    "twilio" : {
+        "sid" : "AC80452f*****75cac6fa5a",
+        "token" : "****",
+        "from" : "****"
     }
 }

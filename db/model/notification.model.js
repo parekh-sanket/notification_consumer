@@ -5,10 +5,24 @@ const model = mongoose.model
 const notificationSchema = new Schema(
     {
         userId: {
-            type: Number,
+            type: String,
         },
         message: {
             type: String,
+        },
+        channel : {
+            type : String,
+            require : true,
+            enum : ['email', 'sms', 'push']
+        },
+        email : {
+            type : String,
+        },
+        mobile : {
+            type : String,
+        },
+        devicePushToken : {
+            type : String
         },
         status : {
             type : String,

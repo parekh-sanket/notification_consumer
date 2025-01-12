@@ -1,3 +1,5 @@
+const commonLib = require('../lib/common.lib')
+
 async function sendNotification({payload}) {
     try {
         let status
@@ -27,6 +29,13 @@ async function sendNotificationOnEmail({payload}) {
         console.log(
             `Sending ${payload.channel} to user ${payload.userId} message ${payload.message}`,
         )
+                
+        // send email
+        await commonLib.sendEmail({
+            subject : "notification",
+            text : payload.message,
+            to : payload.email
+        })
         
         return "delivered"
     }catch(err){
@@ -37,11 +46,15 @@ async function sendNotificationOnEmail({payload}) {
 
 async function sendNotificationOnSms({payload}) {
     try{
-        // we can use any thirdparty integration here
 
         console.log(
             `Sending ${payload.channel} to user ${payload.userId} message ${payload.message}`,
         )
+
+        await commonLib.sendSms({
+            message : payload.message,
+            to : payload.mobile
+        })
 
         return "delivered"
     }catch(err){
@@ -52,11 +65,14 @@ async function sendNotificationOnSms({payload}) {
 
 async function sendNotificationOnPush({payload}) {
     try{
-        // we can use any thirdparty integration here
-
         console.log(
             `Sending ${payload.channel} to user ${payload.userId} message ${payload.message}`,
         )
+
+        await commonLib.sendPush({
+            devicePushToken : payload.devicePushToken,
+            message : payload.message
+        })
 
         return "delivered"
     }catch(err){
