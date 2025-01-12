@@ -8,10 +8,10 @@ Navigate to the config folder in the project directory.
 Copy the appropriate configuration file (e.g., development.json) into the config folder.
 
 2. Build and Run the Docker Container
-Once the configuration is set, build and run the Docker container to start the server.
+Once the configuration is complete, you can start the Docker container with --network="host"
 
 Automated Startup
 Once the Docker container is running:
 
-The application will connect to Kafka, MongoDB, and OpenSearch using the provided configurations.
+The application will connect to Kafka, MongoDB using the provided configurations.
 Consumers will process Kafka messages and store or index data as required.
