@@ -13,8 +13,5 @@ RUN npm install
 # Copy the rest of the application files
 COPY . .
 
-# Expose the application port
-EXPOSE 9091
-
 # Define the command to start the application
 CMD ["npm", "run", "dev"]
