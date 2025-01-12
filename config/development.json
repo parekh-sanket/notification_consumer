@@ -1,0 +1,23 @@
+{
+    "server" : {
+        "port" : 9091
+    },
+    "mongo": {
+        "db_host": "localhost",
+        "db_user": "genuindbuser",
+        "db_name": "genuin",
+        "db_password": "k9Fw5fAka3kanGY5"
+    },
+    "kafka": {
+        "brokers": ["localhost:29092"],
+        "mechanism": "scram-sha-256",
+        "sendNotificationsTopic" : "notifications",
+        "sendNotificationsGroup" : "notifications_g_1"
+    },
+    "opensearch" :{
+        "port" : 9200,
+        "username" : "admin", 
+        "password" : "admin",
+        "host" : "localhost"
+    }
+}
